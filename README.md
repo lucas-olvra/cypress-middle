@@ -1,5 +1,4 @@
-# This README is designed for the default Cypress configuration.  :information_desk_person:
-# Like :point_right: *what was done until the beginning of writing* :point_left: the test.:heavy_exclamation_mark::heavy_exclamation_mark::heavy_exclamation_mark:
+# Setting up the _Cypress e2e_ environment with _GitLab_
 
 # _Prerequisites_
 :one: -👇
@@ -66,13 +65,13 @@ Enter a password, confirm it and click the _Change your password_ button.
 
 > First of all, you need to have downloaded the Docker interface for Mac.
 
-> 1 - In Docker Desktop, go to the terminal of the image you are using (the image needs to be running)
+1. In Docker Desktop, go to the terminal of the image you are using (the image needs to be running)
 
-> 2 - In the terminal, use the command gitlab-rake gitlab:password:reset
+2. In the terminal, use the command gitlab-rake gitlab:password:reset
 
-> 3 - After a few seconds, the terminal will ask which user you want to change the password for, which in this case will be root
+3. After a few seconds, the terminal will ask which user you want to change the password for, which in this case will be root
 
-> 4 - The terminal will ask you to enter the new password and confirm. Soon after, you will be informed that the password has been changed successfully!
+4. The terminal will ask you to enter the new password and confirm. Soon after, you will be informed that the password has been changed successfully!
 
 > Credits to Jhuan Magno Pisa Neves and Walmyr of Talk About Test. Thanks!
 
@@ -118,22 +117,22 @@ In this class, we will clone the project, in addition to installing and configur
 5. Finally, access the newly cloned project directory (`cd cypress-middle/`).
 
 7️⃣ - 👇
-## Inicializando o Cypress
+## Initializing Cypress
 
-No terminal de linha de comando, na raiz do projeto, execute o comando `npx cypress open` (este comando irá abrir a Cypress App, a qual vai te guiar na criação do projeto de testes _end-to-end_ (_E2E_).
+In the command line terminal, at the root of the project, run the command `npx cypress open` (this command will open a Cypress App, which will guide you in creating the _end-to-end_ (_E2E_) testing project.
 
-1. Clique no botão para a criação de um projeto de testes _end-to-end_ (_E2E Testing_)
-2. Aceite os arquivos de configuração clicando no botão _Continue_
-3. Selecione o navegador Electron e clique no botão _Start E2E Testing in Electron_
-4. Crie um primeiro arquivo de teste clicando na opção _Create new emtpy spec_
-5. Nomeie o arquivo como `login.cy.js`; clique no botão _Create spec_; e então, confirme clicando no botão _Ok, run the spec_
-6. Após a execução do arquivo recém criado, feche o navegador Electron.
+1. Click the button to create an _end-to-end_ (_E2E Testing_) testing project
+2. Accept the configuration files by clicking the _Continue_ button
+3. Select the Electron browser and click the _Start E2E Testing in Electron_ button
+4. Create a first test file by clicking on the _Create new emtpy spec_ option
+5. Name the file `login.cy.js`; click on the _Create spec_ button; and then confirm by clicking the _Ok, run specification_ button
+6. After executing the newly created file, close the Electron browser.
 
 8️⃣ - 👇
-### Configurando o projeto de testes automatizados
+### Configuring the automated testing project
 
-1. Feche a Cypress App
-2. Abra o arquivo `cypress.config.js` criado na raiz do projeto e altere seu conteúdo pelo seguinte:
+1. Close the Cypress App
+2. Open the `cypress.config.js` file created in the project root and change its contents by the following:
 
 ```js
 const { defineConfig } = require('cypress')
@@ -143,7 +142,7 @@ module.exports = defineConfig({
     baseUrl: 'http://localhost',
   },
   fixturesFolder: false,
-  video: false,
+  video:false,
 })
 
 ```
