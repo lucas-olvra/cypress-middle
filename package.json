@@ -1,0 +1,16 @@
+{
+  "name": "cypress-middle",
+  "version": "1.0.0",
+  "description": "# _Prerequisites_ :one: -👇 - [Docker](https://www.docker.com/) (I'm using version `24.0.2` while writting this doc) - [git](https://git-scm.com/) (I'm using version `2.39.2` while writting this doc) - [Node.js](https://nodejs.org/en/) (I'm using version `v18.29.3` while writting this doc) - npm (estou usando a versão `9.5.0` while writting this doc) - [Visual Studio Code](https://code.visualstudio.com/) (most updated version) or any other IDE of your choice",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "cypress": "^12.0.2",
+    "cypress-plugin-api": "^2.6.1"
+  }
+}
