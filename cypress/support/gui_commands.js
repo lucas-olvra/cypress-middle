@@ -44,4 +44,32 @@ Cypress.Commands.add('logout', () => {
     }
 
     logout();
-}) 
+})
+
+
+/* 
+    6 - Aqui foi criado o comando personalizado (gui_createProject), o mesmo chamado no caso de teste
+    7 - Dentro desse comando, eu chamei o argumento project e também criei uma variável parametrizada
+    que recebe meu user_name, setado no cypress.env.json
+    8 - Dentro do comando personalizado, comecei o teste de fato.
+    Volte para o arquivo createProject
+*/
+Cypress.Commands.add('gui_createProject', (
+    project,
+    user = Cypress.env('user_name'),
+) => {
+    const createProject = () => {
+        cy.visit('/projects/new')
+
+        cy.get("[data-qa-panel-name='blank_project']").click()
+        cy.get('#project_name').type(project.name)
+        cy.get("[title='Pick a group or namespace']").eq(0).click()
+        cy.get('#__BVID__150').type(user)
+        cy.wait(2000)
+        cy.contains(' root ').click()
+        cy.get('.js-create-project-button').eq(0).click()
+
+    }
+
+    createProject();
+})
