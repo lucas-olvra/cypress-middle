@@ -15,6 +15,7 @@
 Cypress.Commands.add('login', (
     user = Cypress.env('user_name'),
     password = Cypress.env('user_password'),
+    { cacheSession = true } = {},
 ) => {
     const login = () => {
         cy.visit('/users/sign_in')
@@ -24,7 +25,40 @@ Cypress.Commands.add('login', (
         cy.get("[data-qa-selector='sign_in_button']").click()
     }
 
-    login();
+    const validate = () => {
+        cy.visit('/')
+        cy.location('pathname', { timeout: 1000 })
+            .should('not.eq', '/users/sign_in')
+    }
+
+    const options = {
+        cacheAcrossSpecs: true,
+        validate
+    }
+
+    /* 
+        Aqui foi criado uma session para otimizar os testes e deixa-los independentes.
+        1 - o cy.session abaixo está sendo usado para compartilhar dados e estado entre diferentes
+        testes em um mesmo cenário de teste.
+        2 - Ou seja, repare que antes eu setei o cacheSession como true, na funcão customizada
+        logo acima do 'login'.
+        3 - Com isso, caso o cacheSession seja verdadeiro, (o que é como declarado), então ele 
+        recebe um id que é o meu user
+        4 - A função que vai criar a sessão, que é a função de login definida
+        5 - E os options onde eu quero compartilhar a sessão entre as especificações (especificações)
+        são os testes, e eu quero que execute a validação.
+        6 - E por ultimo se a sessão é invalidada e eu tenho essa função de validate no objeto de
+        options, ele vai dizer:
+        O location não é igual igual ao /users/sign_in? Então restaure. Se isso falhar, ele entra no 
+        else e executa a função de login. E se não estiver passando cacheSession (como no caso do
+        case test login), ele continua fazendo o login via interface gráfica de usuário. 
+    */
+
+    if (cacheSession) {
+        cy.session(user, login, options)
+    } else {
+        login();
+    }
 })
 
 
@@ -39,6 +73,7 @@ Cypress.Commands.add('login', (
 
 Cypress.Commands.add('logout', () => {
     const logout = () => {
+        cy.visit('/')
         cy.get("[data-testid='user_avatar_content']").click()
         cy.contains('Sign out').click()
     }
